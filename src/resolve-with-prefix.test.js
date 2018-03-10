@@ -1,6 +1,7 @@
 /* @flow */
 
 import path from 'path';
+import { platform } from 'os';
 import { normalizeRootPath } from '@chrisblossom/test-utils';
 
 import ResolveWithPrefix from './resolve-with-prefix';
@@ -172,5 +173,28 @@ describe('ResolveWithPrefix', () => {
             const result = normalizeRootPath(error);
             expect(result).toMatchSnapshot();
         }
+    });
+
+    it('works with NODE_PATH', () => {
+        const nodePath = process.env.NODE_PATH;
+        const dir = path.resolve(__dirname, '__sandbox__/app1/node_modules');
+
+        const sep = platform() === 'win32' ? ';': ':';
+        if (process.env.NODE_PATH) {
+            const splitNodePath = process.env.NODE_PATH.split(sep);
+            splitNodePath.push(dir);
+
+            process.env.NODE_PATH = splitNodePath.join(':');
+        } else {
+            process.env.NODE_PATH = dir;
+        }
+
+        const resolve = new ResolveWithPrefix({ prefix: 'one-preset' });
+
+        const resolved = resolve('one-preset-test');
+        const expected = path.resolve(dir, 'one-preset-test/index.js');
+
+        expect(resolved).toEqual(expected);
+        process.env.NODE_PATH = nodePath;
     });
 });

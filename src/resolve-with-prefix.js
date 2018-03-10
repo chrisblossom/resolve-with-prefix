@@ -2,6 +2,7 @@
 
 /* eslint-disable no-empty */
 
+import { platform } from 'os';
 import { sync as resolveSync } from 'resolve';
 import { getPossiblePackageIds } from './get-list-of-package-ids';
 import { normalizeOrg, parsePackageId } from './utils';
@@ -16,12 +17,25 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
     const { dirname = process.cwd() } = opts;
 
     /**
+     * add NODE_PATH to resolve algorithm
+     *
+     * https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders
+     * https://github.com/browserify/resolve/issues/39#issuecomment-306223854
+     */
+    const sep = platform() === 'win32' ? ';' : ':';
+    const nodePaths = process.env.NODE_PATH
+        ? process.env.NODE_PATH.split(sep)
+        : [];
+    const resolveOptions = {
+        basedir: dirname,
+        paths: nodePaths,
+    };
+
+    /**
      * If nothing to prefix, pass directly to resolve
      */
     if (prefix === undefined && org === undefined && orgPrefix === undefined) {
-        return resolveSync(packageId, {
-            basedir: dirname,
-        });
+        return resolveSync(packageId, resolveOptions);
     }
 
     const packageIds = getPossiblePackageIds({
@@ -36,9 +50,7 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
     let error;
     for (const id of packageIds) {
         try {
-            resolved = resolveSync(id, {
-                basedir: dirname,
-            });
+            resolved = resolveSync(id, resolveOptions);
         } catch (e) {
             /**
              * Throw immediately if something unexpected has gone wrong
@@ -64,9 +76,7 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
                  */
                 if (!error && strict === true) {
                     try {
-                        resolveSync(packageId, {
-                            basedir: dirname,
-                        });
+                        resolveSync(packageId, resolveOptions);
 
                         e.message += `\n- If you want to resolve "${packageId}", use "module:${packageId}"`;
                         error = e;
@@ -82,9 +92,7 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
                         const scopedPackageId = org + packageId;
 
                         try {
-                            resolveSync(scopedPackageId, {
-                                basedir: dirname,
-                            });
+                            resolveSync(scopedPackageId, resolveOptions);
 
                             e.message += `\n- Did you mean "${scopedPackageId}"?`;
                             error = e;
