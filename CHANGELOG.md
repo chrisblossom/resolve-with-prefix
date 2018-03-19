@@ -7,5 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2018-03-18
+
 *   add process.env.NODE_PATH to resolve algorithm
 *   package updates
