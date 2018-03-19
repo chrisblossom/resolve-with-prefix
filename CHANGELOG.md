@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+*   refactor tests to remove normalizeRootPath
+
 ## [1.0.1] - 2018-03-18
 
+### Fixed
+
 *   add process.env.NODE_PATH to resolve algorithm
+
+### Changed
+
 *   package updates

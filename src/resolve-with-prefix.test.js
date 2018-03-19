@@ -2,7 +2,6 @@
 
 import path from 'path';
 import { platform } from 'os';
-import { normalizeRootPath } from '@chrisblossom/test-utils';
 
 import ResolveWithPrefix from './resolve-with-prefix';
 
@@ -21,8 +20,11 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('one-preset-test');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(
+            dir,
+            'node_modules/one-preset-test/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('resolves full preset with prefix set', () => {
@@ -33,8 +35,11 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('one-preset-test');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(
+            dir,
+            'node_modules/one-preset-test/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('resolves leading preset with prefix', () => {
@@ -45,8 +50,11 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('test');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(
+            dir,
+            'node_modules/one-preset-test/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('resolves other without preset', () => {
@@ -57,8 +65,8 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('other');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(dir, 'node_modules/other/index.js');
+        expect(resolved).toEqual(expected);
     });
 
     it('resolves leading preset with prefix over matching module', () => {
@@ -69,8 +77,11 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('other');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(
+            dir,
+            'node_modules/one-preset-other/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('strict:true, module: works', () => {
@@ -84,8 +95,11 @@ describe('ResolveWithPrefix', () => {
 
         const resolved = resolve('module:explicit-name-test');
 
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+        const expected = path.resolve(
+            dir,
+            'node_modules/explicit-name-test/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('default strict:true, require module:', () => {
@@ -97,12 +111,17 @@ describe('ResolveWithPrefix', () => {
         });
 
         try {
-            expect.assertions(1);
+            expect.hasAssertions();
 
             resolve('explicit-name-test');
         } catch (error) {
-            const result = normalizeRootPath(error);
-            expect(result).toMatchSnapshot();
+            expect(error.code).toEqual('MODULE_NOT_FOUND');
+            expect(error.message).toMatch(
+                /Cannot find module 'one-preset-explicit-name-test'/,
+            );
+            expect(error.message).toMatch(
+                /If you want to resolve "explicit-name-test", use "module:explicit-name-test"/,
+            );
         }
     });
 
@@ -116,12 +135,17 @@ describe('ResolveWithPrefix', () => {
         });
 
         try {
-            expect.assertions(1);
+            expect.hasAssertions();
 
             resolve('explicit-name-test');
         } catch (error) {
-            const result = normalizeRootPath(error);
-            expect(result).toMatchSnapshot();
+            expect(error.code).toEqual('MODULE_NOT_FOUND');
+            expect(error.message).toMatch(
+                /Cannot find module 'one-preset-explicit-name-test'/,
+            );
+            expect(error.message).toMatch(
+                /If you want to resolve "explicit-name-test", use "module:explicit-name-test"/,
+            );
         }
     });
 
@@ -136,11 +160,16 @@ describe('ResolveWithPrefix', () => {
         });
 
         try {
-            expect.assertions(1);
+            expect.hasAssertions();
             resolve('one-preset-scoped');
         } catch (error) {
-            const result = normalizeRootPath(error);
-            expect(result).toMatchSnapshot();
+            expect(error.code).toEqual('MODULE_NOT_FOUND');
+            expect(error.message).toMatch(
+                /Cannot find module 'one-preset-scoped'/,
+            );
+            expect(error.message).toMatch(
+                /Did you mean "@example\/one-preset-scoped"/,
+            );
         }
     });
 
@@ -153,8 +182,12 @@ describe('ResolveWithPrefix', () => {
         });
 
         const resolved = resolve('explicit-name-test');
-        const result = normalizeRootPath(resolved);
-        expect(result).toMatchSnapshot();
+
+        const expected = path.resolve(
+            dir,
+            'node_modules/explicit-name-test/index.js',
+        );
+        expect(resolved).toEqual(expected);
     });
 
     it('if module not found but it looks like @org missing, add error', () => {
@@ -167,11 +200,16 @@ describe('ResolveWithPrefix', () => {
         });
 
         try {
-            expect.assertions(1);
+            expect.hasAssertions();
             resolve('one-preset-scoped');
         } catch (error) {
-            const result = normalizeRootPath(error);
-            expect(result).toMatchSnapshot();
+            expect(error.code).toEqual('MODULE_NOT_FOUND');
+            expect(error.message).toMatch(
+                /Cannot find module 'one-preset-scoped'/,
+            );
+            expect(error.message).toMatch(
+                /Did you mean "@example\/one-preset-scoped"/,
+            );
         }
     });
 

@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "@chrisblossom/eslint-config": "^1.0.1",
-    "@chrisblossom/test-utils": "^1.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-dynamic-import-node": "^1.2.0",
