@@ -179,7 +179,7 @@ describe('ResolveWithPrefix', () => {
         const nodePath = process.env.NODE_PATH;
         const dir = path.resolve(__dirname, '__sandbox__/app1/node_modules');
 
-        const sep = platform() === 'win32' ? ';': ':';
+        const sep = platform() === 'win32' ? ';' : ':';
         if (process.env.NODE_PATH) {
             const splitNodePath = process.env.NODE_PATH.split(sep);
             splitNodePath.push(dir);

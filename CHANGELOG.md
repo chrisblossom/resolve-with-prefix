@@ -6,5 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- add process.env.NODE_PATH to resolve algorithm
-- package updates
+
+*   add process.env.NODE_PATH to resolve algorithm
+*   package updates
