@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 *   refactor tests to remove normalizeRootPath
+*   package updates
 
 ## [1.0.1] - 2018-03-18
 
