@@ -4,7 +4,6 @@
  * https://facebook.github.io/jest/docs/configuration.html#options
  */
 const jest = {
-    rootDir: 'src',
     moduleDirectories: ['node_modules', 'src'],
     testEnvironment: 'node',
     collectCoverage: false,
