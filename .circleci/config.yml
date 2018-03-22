@@ -21,7 +21,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run test.ci
+      # Only run test.ci on node6 until parallel builds are fixed
+      - run: npm run test
   test-node8:
     docker:
       - image: circleci/node:8
