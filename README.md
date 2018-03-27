@@ -1,8 +1,8 @@
 # resolve-with-prefix
 
 [![Linux Build Status](https://img.shields.io/circleci/project/github/chrisblossom/resolve-with-prefix/master.svg?label=linux%20build)](https://circleci.com/gh/chrisblossom/resolve-with-prefix/tree/master)
-[![Windows Build status](https://img.shields.io/appveyor/ci/chrisblossom/resolve-with-prefix/master.svg?label=windows%20build)](https://ci.appveyor.com/project/chrisblossom/resolve-with-prefix/branch/master)
-[![Coveralls github branch](https://img.shields.io/coveralls/github/chrisblossom/resolve-with-prefix/master.svg)](https://coveralls.io/github/chrisblossom/resolve-with-prefix?branch=master)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/chrisblossom/resolve-with-prefix/master.svg?label=windows%20build)](https://ci.appveyor.com/project/chrisblossom/resolve-with-prefix/branch/master)
+[![Code Coverage](https://img.shields.io/coveralls/github/chrisblossom/resolve-with-prefix/master.svg)](https://coveralls.io/github/chrisblossom/resolve-with-prefix?branch=master)
 
 Resolve configuration files with a predefined prefix.
 
