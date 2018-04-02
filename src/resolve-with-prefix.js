@@ -7,9 +7,9 @@ import { sync as resolveSync } from 'resolve';
 import { getPossiblePackageIds } from './get-list-of-package-ids';
 import { normalizeOrg, parsePackageId } from './utils';
 
-type ResolveOptions = {
+type ResolveOptions = $Shape<{
     dirname?: string,
-};
+}>;
 
 function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
     const { prefix, org, orgPrefix, strict = true } = this.options;
@@ -127,12 +127,12 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
     throw error;
 }
 
-export type ResolveWithPrefixOptions = {
-    prefix?: string | Array<string>,
+export type ResolveWithPrefixOptions = $Shape<{
+    prefix?: string | $ReadOnlyArray<string>,
     org?: string,
-    orgPrefix?: string | Array<string>,
+    orgPrefix?: string | $ReadOnlyArray<string>,
     strict?: boolean,
-};
+}>;
 
 function ResolveWithPrefix(options?: ResolveWithPrefixOptions = {}) {
     const org = normalizeOrg(options.org);
@@ -146,4 +146,6 @@ function ResolveWithPrefix(options?: ResolveWithPrefixOptions = {}) {
 }
 
 export type Resolve = typeof resolveWithPrefix;
+
+// eslint-disable-next-line import/no-default-export
 export default ResolveWithPrefix;

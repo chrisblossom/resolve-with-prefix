@@ -3,13 +3,13 @@
 import path from 'path';
 import { normalizeOrg, parsePackageId } from './utils';
 
-type Args = {
+type Args = {|
     packageId: string,
-    prefix?: string | Array<string>,
+    prefix?: string | $ReadOnlyArray<string>,
     org?: string,
-    orgPrefix?: string | Array<string>,
+    orgPrefix?: string | $ReadOnlyArray<string>,
     strict?: boolean,
-};
+|};
 
 function getPossiblePackageIds(args: Args) {
     const { packageId, prefix: standardPrefix, orgPrefix, strict } = args;

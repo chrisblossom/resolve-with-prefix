@@ -20,8 +20,8 @@
   "main": "build/resolve-with-prefix.js",
   "scripts": {
     "clean": "del ./build/*",
-    "lint": "eslint --ext .js .",
-    "lint.fix": "eslint --fix --ext .js .",
+    "lint": "eslint --report-unused-disable-directives .",
+    "lint.fix": "eslint --report-unused-disable-directives --fix .",
     "format": "prettier **/*.{js,md,json} --write",
     "test": "jest",
     "test.ci": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -40,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@chrisblossom/eslint-config": "^1.0.1",
+    "@chrisblossom/eslint-config": "^2.0.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-dynamic-import-node": "^1.2.0",
