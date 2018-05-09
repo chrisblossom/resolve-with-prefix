@@ -57,7 +57,8 @@ function getPossiblePackageIds(args: Args) {
          */
         const hasPrefix =
             `${justId.substring(0, prefix.length)}-` === `${prefix}-`;
-        if (hasPrefix) {
+
+        if (hasPrefix && prefix !== justId) {
             return [packageId];
         }
 

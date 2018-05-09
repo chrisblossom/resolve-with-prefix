@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+*   If packageId is equal to prefix, search prefix-packageId first
+
 ## [1.0.3] - 2018-04-02
 
 ### Changed

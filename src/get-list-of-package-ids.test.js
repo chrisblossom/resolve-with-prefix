@@ -46,7 +46,48 @@ describe('getPossiblePackageIds', () => {
         expect(packageIds).toEqual(['one-preset-test', 'test']);
     });
 
-    test('@org - if prefix is not set, return packageId and prefixed', () => {
+    test('if package is equal to prefix, search prefix-prefix first', () => {
+        const packageId = 'preset';
+        const prefix = 'preset';
+
+        const packageIds = getPossiblePackageIds({ packageId, prefix });
+
+        expect(packageIds).toEqual(['preset-preset', 'preset']);
+    });
+
+    test('outside @org - if package is equal to prefix, search prefix-prefix first', () => {
+        const packageId = '@example/preset';
+        const prefix = 'preset';
+
+        const packageIds = getPossiblePackageIds({ packageId, prefix });
+
+        expect(packageIds).toEqual([
+            '@example/preset-preset',
+            '@example/preset',
+        ]);
+    });
+
+    test('inside @org - if package is equal to prefix, search prefix-prefix first', () => {
+        const packageId = '@example/preset';
+        const prefix = 'example-preset';
+        const org = '@example';
+        const orgPrefix = ['preset', 'example-preset'];
+
+        const packageIds = getPossiblePackageIds({
+            packageId,
+            prefix,
+            org,
+            orgPrefix,
+        });
+
+        expect(packageIds).toEqual([
+            '@example/preset-preset',
+            '@example/example-preset-preset',
+            '@example/preset',
+        ]);
+    });
+
+    test('outside @org - if prefix is not set, return packageId and prefixed', () => {
         const packageId = '@example/test';
         const prefix = 'one-preset';
 
