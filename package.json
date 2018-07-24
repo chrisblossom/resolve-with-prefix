@@ -1,6 +1,6 @@
 {
   "name": "resolve-with-prefix",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Resolve modules with a predefined prefix.",
   "keywords": [
     "resolve",
