@@ -1,6 +1,6 @@
 # resolve-with-prefix
 
-[![npm](https://img.shields.io/npm/v/ex-config.svg?label=npm%20version)](https://www.npmjs.com/package/ex-config)
+[![npm](https://img.shields.io/npm/v/resolve-with-prefix.svg?label=npm%20version)](https://www.npmjs.com/package/resolve-with-prefix)
 [![Linux Build Status](https://img.shields.io/circleci/project/github/chrisblossom/resolve-with-prefix/master.svg?label=linux%20build)](https://circleci.com/gh/chrisblossom/resolve-with-prefix/tree/master)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/chrisblossom/resolve-with-prefix/master.svg?label=windows%20build)](https://ci.appveyor.com/project/chrisblossom/resolve-with-prefix/branch/master)
 [![Code Coverage](https://img.shields.io/codecov/c/github/chrisblossom/resolve-with-prefix/master.svg)](https://codecov.io/gh/chrisblossom/resolve-with-prefix/branch/master)
