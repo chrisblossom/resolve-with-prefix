@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/ex-config.svg?label=npm%20version)](https://www.npmjs.com/package/ex-config)
 [![Linux Build Status](https://img.shields.io/circleci/project/github/chrisblossom/resolve-with-prefix/master.svg?label=linux%20build)](https://circleci.com/gh/chrisblossom/resolve-with-prefix/tree/master)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/chrisblossom/resolve-with-prefix/master.svg?label=windows%20build)](https://ci.appveyor.com/project/chrisblossom/resolve-with-prefix/branch/master)
-[![Code Coverage](https://img.shields.io/coveralls/github/chrisblossom/resolve-with-prefix/master.svg)](https://coveralls.io/github/chrisblossom/resolve-with-prefix?branch=master)
+[![Code Coverage](https://img.shields.io/codecov/c/github/chrisblossom/resolve-with-prefix/master.svg)](https://codecov.io/gh/chrisblossom/resolve-with-prefix/branch/master)
 
 Resolve configuration files with a predefined prefix.
 
@@ -124,5 +124,5 @@ resolve('./path/to/module');
 
 This package was created with the great work / lessons learned from:
 
-*   [babel](https://github.com/babel/babel/)
-*   [eslint](https://github.com/eslint/eslint)
+-   [babel](https://github.com/babel/babel/)
+-   [eslint](https://github.com/eslint/eslint)
