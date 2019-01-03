@@ -9,33 +9,34 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-*   Internal: Use [`backtrack`](https://github.com/chrisblossom/backtrack) to manage build environment
+-   Internal: Use [`backtrack`](https://github.com/chrisblossom/backtrack) to manage build environment
+-   package updates
 
 ## [1.0.4] - 2018-05-09
 
 ### Fixed
 
-*   If packageId is equal to prefix, search prefix-packageId first
+-   If packageId is equal to prefix, search prefix-packageId first
 
 ## [1.0.3] - 2018-04-02
 
 ### Changed
 
-*   flow typing updates
+-   flow typing updates
 
 ## [1.0.2] - 2018-03-23
 
 ### Changed
 
-*   refactor tests to remove normalizeRootPath
-*   package updates
+-   refactor tests to remove normalizeRootPath
+-   package updates
 
 ## [1.0.1] - 2018-03-18
 
 ### Fixed
 
-*   add process.env.NODE_PATH to resolve algorithm
+-   add process.env.NODE_PATH to resolve algorithm
 
 ### Changed
 
-*   package updates
+-   package updates
