@@ -37,21 +37,15 @@
     "lint": "backtrack lint",
     "lint.fix": "backtrack lint.fix",
     "prepublishOnly": "backtrack prepublishOnly",
-    "prepush": "backtrack prepush",
     "test": "backtrack test",
     "test.ci": "backtrack test.ci",
     "test.ci-pretest": "backtrack test.ci-pretest",
     "test.update": "jest --updateSnapshot",
     "test.watch": "jest --watch"
   },
-  "babel": {
-    "presets": [
-      "@backtrack/preset-node-module/babel-flow"
-    ]
-  },
   "devDependencies": {
     "@backtrack/core": "^0.1.23",
-    "@backtrack/preset-node-module": "^0.3.7",
+    "@backtrack/preset-node-module": "^0.5.2",
     "flow-bin": "^0.80.0"
   },
   "dependencies": {
