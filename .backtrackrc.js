@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    presets: [['@backtrack/node-module', { flow: true }]],
+    presets: [['@backtrack/node', { mode: 'module', syntax: 'flow' }]],
 
     config: {
         wallaby: (config) => {
@@ -10,6 +10,12 @@ module.exports = {
             });
 
             config.files.push('!node_modules/**');
+
+            return config;
+        },
+
+        babel: (config) => {
+            delete config.overrides;
 
             return config;
         },
