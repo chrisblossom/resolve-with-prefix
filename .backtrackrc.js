@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    presets: [['@backtrack/node', { mode: 'module', syntax: 'flow' }]],
+    presets: [['@backtrack/node', { mode: 'module', syntax: 'typescript' }]],
 
     config: {
         wallaby: (config) => {

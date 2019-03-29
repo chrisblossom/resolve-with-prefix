@@ -1,11 +1,9 @@
-/* @flow */
-
 import { normalizeOrg, parsePackageId } from './utils';
 
 describe('normalizeOrg', () => {
     test('handles undefined', () => {
         const result = normalizeOrg();
-        expect(result).toEqual();
+        expect(result).toEqual(undefined);
     });
 
     test('adds @', () => {

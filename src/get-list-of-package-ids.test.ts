@@ -1,5 +1,3 @@
-/* @flow */
-
 import { getPossiblePackageIds } from './get-list-of-package-ids';
 
 describe('getPossiblePackageIds', () => {

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+-   Migrate to Typescript
 -   Internal: Use [`@backtrack/preset-node`](https://github.com/chrisblossom/backtrack-preset-node)
 
 ## [1.0.8] - 2019-01-02

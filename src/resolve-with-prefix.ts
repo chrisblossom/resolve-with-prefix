@@ -1,5 +1,3 @@
-/* @flow */
-
 /* eslint-disable no-empty */
 
 import { platform } from 'os';
@@ -7,11 +5,22 @@ import { sync as resolveSync } from 'resolve';
 import { getPossiblePackageIds } from './get-list-of-package-ids';
 import { normalizeOrg, parsePackageId } from './utils';
 
-type ResolveOptions = $Shape<{
-    dirname?: string,
-}>;
+type ResolveOptions = {
+    dirname?: string;
+};
 
-function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
+export type ResolveWithPrefixOptions = {
+    prefix?: string | string[];
+    org?: string;
+    orgPrefix?: string | string[];
+    strict?: boolean;
+};
+
+function resolveWithPrefix(
+    this: { options: ResolveWithPrefixOptions },
+    packageId: string,
+    opts: ResolveOptions = {},
+): string {
     const { prefix, org, orgPrefix, strict = true } = this.options;
 
     const { dirname = process.cwd() } = opts;
@@ -127,14 +136,15 @@ function resolveWithPrefix(packageId: string, opts?: ResolveOptions = {}) {
     throw error;
 }
 
-export type ResolveWithPrefixOptions = $Shape<{
-    prefix?: string | $ReadOnlyArray<string>,
-    org?: string,
-    orgPrefix?: string | $ReadOnlyArray<string>,
-    strict?: boolean,
-}>;
-
-function ResolveWithPrefix(options?: ResolveWithPrefixOptions = {}) {
+const ResolveWithPrefix: {
+    new (options?: ResolveWithPrefixOptions): (
+        packageId: string,
+        opts?: ResolveOptions,
+    ) => string;
+} = function ResolveWithPrefix(
+    this: { options: ResolveWithPrefixOptions },
+    options: ResolveWithPrefixOptions = {},
+) {
     const org = normalizeOrg(options.org);
 
     this.options = {
@@ -143,9 +153,8 @@ function ResolveWithPrefix(options?: ResolveWithPrefixOptions = {}) {
     };
 
     return resolveWithPrefix.bind(this);
-}
+} as any;
 
 export type Resolve = typeof resolveWithPrefix;
 
-// eslint-disable-next-line import/no-default-export
 export default ResolveWithPrefix;

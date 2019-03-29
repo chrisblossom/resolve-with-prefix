@@ -21,15 +21,14 @@
     "node": ">=6.9.0"
   },
   "files": [
-    "dist/",
-    "flow-typed/"
+    "dist/"
   ],
   "main": "dist/resolve-with-prefix.js",
+  "types": "dist/resolve-with-prefix.d.ts",
   "scripts": {
     "build": "backtrack build --production",
     "clean": "backtrack clean",
     "dev": "backtrack dev --development",
-    "flow": "backtrack flow",
     "format": "backtrack format",
     "git-pre-commit": "backtrack git-pre-commit",
     "git-pre-push": "backtrack git-pre-push",
@@ -40,12 +39,16 @@
     "test.ci": "backtrack test.ci",
     "test.ci-pretest": "backtrack test.ci-pretest",
     "test.update": "jest --update-snapshot",
-    "test.watch": "jest --watch"
+    "test.watch": "jest --watch",
+    "typescript": "backtrack typescript"
   },
   "devDependencies": {
-    "@backtrack/core": "^0.1.26",
-    "@backtrack/preset-node": "^0.1.3",
-    "flow-bin": "^0.80.0"
+    "@backtrack/core": "^0.1.27",
+    "@backtrack/preset-node": "^0.1.4",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.12.2",
+    "@types/resolve": "0.0.8",
+    "typescript": "^3.4.1"
   },
   "dependencies": {
     "resolve": "^1.10.0"

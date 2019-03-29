@@ -1,5 +1,3 @@
-/* @flow */
-
 /**
  * normalize org to equal npm scope format @org/
  */

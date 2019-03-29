@@ -1,15 +1,13 @@
-/* @flow */
-
 import path from 'path';
 import { normalizeOrg, parsePackageId } from './utils';
 
-type Args = {|
-    packageId: string,
-    prefix?: string | $ReadOnlyArray<string>,
-    org?: string,
-    orgPrefix?: string | $ReadOnlyArray<string>,
-    strict?: boolean,
-|};
+type Args = {
+    packageId: string;
+    prefix?: string | string[];
+    org?: string;
+    orgPrefix?: string | string[];
+    strict?: boolean;
+};
 
 function getPossiblePackageIds(args: Args) {
     const { packageId, prefix: standardPrefix, orgPrefix, strict } = args;
@@ -27,7 +25,13 @@ function getPossiblePackageIds(args: Args) {
 
     const prefixes = Array.isArray(matchedPrefix)
         ? matchedPrefix
-        : [matchedPrefix].filter(Boolean);
+        : [matchedPrefix].reduce((acc: string[], prefix) => {
+              if (!prefix) {
+                  return acc;
+              }
+
+              return [...acc, prefix];
+          }, []);
 
     if (prefixes.length === 0) {
         return [packageId];
