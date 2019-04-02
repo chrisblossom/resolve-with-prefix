@@ -107,7 +107,7 @@ resolve('@example/one');
 resolve('one', { dirname: __dirname });
 
 /**
- * Explictly resolve a module
+ * Explicitly resolve a module
  *
  * See configuration option: strict
  */
