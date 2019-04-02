@@ -13,11 +13,5 @@ module.exports = {
 
             return config;
         },
-
-        babel: (config) => {
-            delete config.overrides;
-
-            return config;
-        },
     },
 };
