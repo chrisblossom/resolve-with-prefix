@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.9] - 2019-04-01
+
 ### Changed
 
 -   Migrate to Typescript
