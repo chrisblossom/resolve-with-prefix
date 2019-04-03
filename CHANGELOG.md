@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
--   Add `resolveWithPrefix` named export
--   Add `createResolver` named export
+-   Add named exports: `resolveWithPrefix`, `resolveWithPrefixSync`, `createResolver`, and `createResolverSync`
 -   Breaking: remove default export
+-   Breaking: `resolveWithPrefix` / `createResolver` are now async
 -   Breaking: remove `new ResolveWithPrefix` syntax
 
 ## [1.0.9] - 2019-04-01

@@ -1,51 +1,96 @@
 import path from 'path';
-import { createResolver } from './create-resolver';
+import { createResolver, createResolverSync } from './create-resolver';
+import { ResolveOptions } from './resolve-with-prefix';
 
 describe('createResolver', () => {
     const cwd = process.cwd();
+    const dir = path.resolve(__dirname, '__sandbox__/app1/');
+
+    beforeEach(() => {
+        process.chdir(dir);
+    });
 
     afterEach(() => {
         process.chdir(cwd);
     });
 
-    test('creates multiple resolvers', () => {
-        const dir = path.resolve(__dirname, '__sandbox__/app1/');
-        process.chdir(dir);
+    describe('creates multiple resolvers', () => {
+        const checkResult = (
+            presetResolved: string,
+            pluginResolved: string,
+        ) => {
+            const presetExpected = path.resolve(
+                dir,
+                'node_modules/one-preset-test/index.js',
+            );
+            const pluginExpected = path.resolve(
+                dir,
+                'node_modules/one-plugin-test/index.js',
+            );
 
-        const resolvePreset = createResolver({ prefix: 'one-preset' });
-        const resolvePlugin = createResolver({ prefix: 'one-plugin' });
+            expect(presetResolved).toEqual(presetExpected);
+            expect(pluginResolved).toEqual(pluginExpected);
+        };
 
-        const pluginResolved = resolvePlugin('test');
-        const presetResolved = resolvePreset('test');
+        const packageId = 'test';
+        const presetOptions = { prefix: 'one-preset' };
+        const pluginOptions = { prefix: 'one-plugin' };
 
-        const pluginExpected = path.resolve(
-            dir,
-            'node_modules/one-plugin-test/index.js',
-        );
-        const presetExpected = path.resolve(
-            dir,
-            'node_modules/one-preset-test/index.js',
-        );
+        test('async', async () => {
+            const resolvePreset = createResolver(presetOptions);
+            const resolvePlugin = createResolver(pluginOptions);
 
-        expect(pluginResolved).toEqual(pluginExpected);
-        expect(presetResolved).toEqual(presetExpected);
-    });
+            const pluginResolved = await resolvePlugin(packageId);
+            const presetResolved = await resolvePreset(packageId);
 
-    test('cannot overwrite resolve options', () => {
-        const dir = path.resolve(__dirname, '__sandbox__/app1/');
-        process.chdir(dir);
-
-        const resolvePreset = createResolver({ prefix: 'one-preset' });
-        const presetResolved = resolvePreset('test', {
-            // @ts-ignore
-            prefix: 'one-plugin',
+            checkResult(presetResolved, pluginResolved);
         });
 
-        const presetExpected = path.resolve(
-            dir,
-            'node_modules/one-preset-test/index.js',
-        );
+        test('sync', () => {
+            const resolvePreset = createResolverSync(presetOptions);
+            const resolvePlugin = createResolverSync(pluginOptions);
 
-        expect(presetResolved).toEqual(presetExpected);
+            const pluginResolved = resolvePlugin(packageId);
+            const presetResolved = resolvePreset(packageId);
+
+            checkResult(presetResolved, pluginResolved);
+        });
+    });
+
+    describe('cannot overwrite resolve options', () => {
+        const checkResult = (presetResolved: string) => {
+            const presetExpected = path.resolve(
+                dir,
+                'node_modules/one-preset-test/index.js',
+            );
+
+            expect(presetResolved).toEqual(presetExpected);
+        };
+
+        const packageId = 'test';
+        const presetOptions = { prefix: 'one-preset' };
+        const resolveOptions: ResolveOptions = {
+            // @ts-ignore
+            prefix: 'one-plugin',
+        };
+
+        test('async', async () => {
+            const resolvePreset = createResolver(presetOptions);
+
+            const presetResolved = await resolvePreset(
+                packageId,
+                resolveOptions,
+            );
+
+            checkResult(presetResolved);
+        });
+
+        test('sync', () => {
+            const resolvePreset = createResolverSync(presetOptions);
+
+            const presetResolved = resolvePreset(packageId, resolveOptions);
+
+            checkResult(presetResolved);
+        });
     });
 });

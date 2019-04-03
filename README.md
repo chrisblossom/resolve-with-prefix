@@ -20,7 +20,12 @@ For example, `@babel/env` --> `@babel/preset-env`.
 ## Usage
 
 ```js
-import { resolveWithPrefix, createResolver } from 'resolve-with-prefix';
+import {
+    resolveWithPrefix,
+    resolveWithPrefixSync,
+    createResolver,
+    createResolverSync,
+} from 'resolve-with-prefix';
 
 const presetOptions = {
     prefix: 'babel-preset',
@@ -35,15 +40,21 @@ const pluginOptions = {
 };
 
 const resolvePreset = createResolver(presetOptions);
+const resolvePresetSync = createResolverSync(presetOptions);
 const resolvePlugin = createResolver(pluginOptions);
+const resolvePluginSync = createResolverSync(pluginOptions);
 
 // resolve @babel/preset-env, @babel/env
-resolveWithPrefix('@babel/env', presetOptions);
-resolvePreset('@babel/env');
+await resolveWithPrefix('@babel/env', presetOptions);
+resolveWithPrefixSync('@babel/env', presetOptions);
+await resolvePreset('@babel/env');
+resolvePresetSync('@babel/env');
 
 // resolve babel-plugin-transform-object-rest-spread, transform-object-rest-spread
-resolveWithPrefix('transform-object-rest-spread', pluginOptions);
-resolvePlugin('transform-object-rest-spread');
+await resolveWithPrefix('transform-object-rest-spread', pluginOptions);
+resolveWithPrefixSync('transform-object-rest-spread', pluginOptions);
+await resolvePlugin('transform-object-rest-spread');
+resolvePluginSync('transform-object-rest-spread');
 ```
 
 ## Options
@@ -79,11 +90,12 @@ const options = {
 
     /**
      * Only allow prefixed module resolution.
-     * Explicit modules can be required by prepending module:
+     * Explicit modules can be required by pre-pending "module:"
      * For example, module:local-module
      *
-     * Default: true
      * Optional
+     *
+     * Default: true
      */
     strict: false,
 };
@@ -94,44 +106,44 @@ const resolve = createResolver(options);
  * Matches the first matched packages
  * example-prefix-one , one
  */
-resolveWithPrefix('one', options);
-resolve('one');
+await resolveWithPrefix('one', options);
+await resolve('one');
 
 /**
  * Matches the first matched packages
  * @other/example-prefix-one , @other/one
  */
-resolveWithPrefix('@other/one', options);
-resolve('@other/one');
+await resolveWithPrefix('@other/one', options);
+await resolve('@other/one');
 
 /**
  * Matches the first matched packages
  * @example/prefix-one , @example/example-prefix-one , @example/one
  */
-resolveWithPrefix('@example/one', options);
-resolve('@example/one');
+await resolveWithPrefix('@example/one', options);
+await resolve('@example/one');
 
 /**
  * Use the dirname option to specify where to search for node_modules
  *
  * Default is process.cwd()
  */
-resolveWithPrefix('one', { ...options, dirname: __dirname });
-resolve('one', { dirname: __dirname });
+await resolveWithPrefix('one', { ...options, dirname: __dirname });
+await resolve('one', { dirname: __dirname });
 
 /**
  * Explicitly resolve a module
  *
  * See configuration option: strict
  */
-resolveWithPrefix('module:local-module', options);
-resolve('module:local-module');
+await resolveWithPrefix('module:local-module', options);
+await resolve('module:local-module');
 
 /**
  * Absolute and relative paths allowed
  */
-resolve('/path/to/module');
-resolve('./path/to/module');
+await resolve('/path/to/module');
+await resolve('./path/to/module');
 ```
 
 ## Thanks To
