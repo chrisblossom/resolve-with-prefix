@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+-   Add `resolveWithPrefix` named export
+-   Add `createResolver` named export
+-   Breaking: remove default export
+-   Breaking: remove `new ResolveWithPrefix` syntax
+
 ## [1.0.9] - 2019-04-01
 
 ### Changed

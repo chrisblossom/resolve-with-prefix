@@ -4,26 +4,31 @@ import { platform } from 'os';
 import { sync as resolveSync } from 'resolve';
 import { getPossiblePackageIds } from './get-list-of-package-ids';
 import { normalizeOrg, parsePackageId } from './utils';
+import { createResolver } from './create-resolver';
 
-type ResolveOptions = {
-    dirname?: string;
-};
-
-export type ResolveWithPrefixOptions = {
+export type PrefixOptions = {
     prefix?: string | string[];
     org?: string;
     orgPrefix?: string | string[];
     strict?: boolean;
 };
 
-function resolveWithPrefix(
-    this: { options: ResolveWithPrefixOptions },
-    packageId: string,
-    opts: ResolveOptions = {},
-): string {
-    const { prefix, org, orgPrefix, strict = true } = this.options;
+export type ResolveOptions = {
+    dirname?: string;
+};
 
-    const { dirname = process.cwd() } = opts;
+function resolveWithPrefix(
+    packageId: string,
+    options: PrefixOptions & ResolveOptions = {},
+): string {
+    const {
+        prefix,
+        orgPrefix,
+        strict = true,
+        dirname = process.cwd(),
+    } = options;
+
+    const org = normalizeOrg(options.org);
 
     /**
      * add NODE_PATH to resolve algorithm
@@ -47,8 +52,7 @@ function resolveWithPrefix(
         return resolveSync(packageId, resolveOptions);
     }
 
-    const packageIds = getPossiblePackageIds({
-        packageId,
+    const packageIds = getPossiblePackageIds(packageId, {
         prefix,
         org,
         orgPrefix,
@@ -136,25 +140,4 @@ function resolveWithPrefix(
     throw error;
 }
 
-const ResolveWithPrefix: {
-    new (options?: ResolveWithPrefixOptions): (
-        packageId: string,
-        opts?: ResolveOptions,
-    ) => string;
-} = function ResolveWithPrefix(
-    this: { options: ResolveWithPrefixOptions },
-    options: ResolveWithPrefixOptions = {},
-) {
-    const org = normalizeOrg(options.org);
-
-    this.options = {
-        ...options,
-        org,
-    };
-
-    return resolveWithPrefix.bind(this);
-} as any;
-
-export type Resolve = typeof resolveWithPrefix;
-
-export default ResolveWithPrefix;
+export { createResolver, resolveWithPrefix };

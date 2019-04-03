@@ -13,5 +13,11 @@ module.exports = {
 
             return config;
         },
+
+        eslint: {
+            rules: {
+                'import/no-cycle': 'off',
+            },
+        },
     },
 };

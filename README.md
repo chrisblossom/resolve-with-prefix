@@ -20,31 +20,38 @@ For example, `@babel/env` --> `@babel/preset-env`.
 ## Usage
 
 ```js
-import ResolveWithPrefix from 'resolve-with-prefix';
+import { resolveWithPrefix, createResolver } from 'resolve-with-prefix';
 
-const resolvePreset = new ResolveWithPrefix({
+const presetOptions = {
     prefix: 'babel-preset',
     org: '@babel',
     orgPrefix: 'preset',
-});
+};
 
-const resolvePlugin = new ResolveWithPrefix({
+const pluginOptions = {
     prefix: 'babel-plugin',
     org: '@babel',
     orgPrefix: 'plugin',
-});
+};
+
+const resolvePreset = createResolver(presetOptions);
+const resolvePlugin = createResolver(pluginOptions);
 
 // resolve @babel/preset-env, @babel/env
-const matchedPreset = resolvePreset('@babel/env');
+resolveWithPrefix('@babel/env', presetOptions);
+resolvePreset('@babel/env');
 
 // resolve babel-plugin-transform-object-rest-spread, transform-object-rest-spread
-const matchedPlugin = resolvePlugin('transform-object-rest-spread');
+resolveWithPrefix('transform-object-rest-spread', pluginOptions);
+resolvePlugin('transform-object-rest-spread');
 ```
 
 ## Options
 
 ```js
-const resolve = new ResolveWithPrefix({
+import { resolveWithPrefix, createResolver } from 'resolve-with-prefix';
+
+const options = {
     /**
      * Prefix to add to packageId
      *
@@ -79,24 +86,29 @@ const resolve = new ResolveWithPrefix({
      * Optional
      */
     strict: false,
-});
+};
+
+const resolve = createResolver(options);
 
 /**
  * Matches the first matched packages
  * example-prefix-one , one
  */
+resolveWithPrefix('one', options);
 resolve('one');
 
 /**
  * Matches the first matched packages
  * @other/example-prefix-one , @other/one
  */
+resolveWithPrefix('@other/one', options);
 resolve('@other/one');
 
 /**
  * Matches the first matched packages
  * @example/prefix-one , @example/example-prefix-one , @example/one
  */
+resolveWithPrefix('@example/one', options);
 resolve('@example/one');
 
 /**
@@ -104,6 +116,7 @@ resolve('@example/one');
  *
  * Default is process.cwd()
  */
+resolveWithPrefix('one', { ...options, dirname: __dirname });
 resolve('one', { dirname: __dirname });
 
 /**
@@ -111,6 +124,7 @@ resolve('one', { dirname: __dirname });
  *
  * See configuration option: strict
  */
+resolveWithPrefix('module:local-module', options);
 resolve('module:local-module');
 
 /**

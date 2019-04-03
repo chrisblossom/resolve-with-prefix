@@ -4,7 +4,7 @@ describe('getPossiblePackageIds', () => {
     test('returns packageId with no prefix', () => {
         const packageId = 'one-preset-test';
 
-        const packageIds = getPossiblePackageIds({ packageId });
+        const packageIds = getPossiblePackageIds(packageId);
 
         expect(packageIds).toEqual(['one-preset-test']);
     });
@@ -12,7 +12,7 @@ describe('getPossiblePackageIds', () => {
     test('@org - returns packageId with no prefix', () => {
         const packageId = '@example/one-preset-test';
 
-        const packageIds = getPossiblePackageIds({ packageId });
+        const packageIds = getPossiblePackageIds(packageId);
 
         expect(packageIds).toEqual(['@example/one-preset-test']);
     });
@@ -21,7 +21,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = 'one-preset-test';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['one-preset-test']);
     });
@@ -30,7 +30,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = '@example/one-preset-test';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['@example/one-preset-test']);
     });
@@ -39,7 +39,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = 'test';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['one-preset-test', 'test']);
     });
@@ -48,7 +48,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = 'preset';
         const prefix = 'preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['preset-preset', 'preset']);
     });
@@ -57,7 +57,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = '@example/preset';
         const prefix = 'preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual([
             '@example/preset-preset',
@@ -71,8 +71,7 @@ describe('getPossiblePackageIds', () => {
         const org = '@example';
         const orgPrefix = ['preset', 'example-preset'];
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             org,
             orgPrefix,
@@ -89,7 +88,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = '@example/test';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual([
             '@example/one-preset-test',
@@ -101,7 +100,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = 'module:test';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['test']);
     });
@@ -110,7 +109,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = '/path/to/module';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['/path/to/module']);
     });
@@ -119,7 +118,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = './path/to/module';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['./path/to/module']);
     });
@@ -128,7 +127,7 @@ describe('getPossiblePackageIds', () => {
         const packageId = '../path/to/module';
         const prefix = 'one-preset';
 
-        const packageIds = getPossiblePackageIds({ packageId, prefix });
+        const packageIds = getPossiblePackageIds(packageId, { prefix });
 
         expect(packageIds).toEqual(['../path/to/module']);
     });
@@ -139,8 +138,7 @@ describe('getPossiblePackageIds', () => {
         const org = '@example';
         const orgPrefix = ['preset', 'example-preset'];
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             org,
             orgPrefix,
@@ -159,8 +157,7 @@ describe('getPossiblePackageIds', () => {
         const org = '@example';
         const orgPrefix = ['preset', 'example-preset'];
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             org,
             orgPrefix,
@@ -174,8 +171,7 @@ describe('getPossiblePackageIds', () => {
         const prefix = 'other-preset';
         const org = '@example';
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             org,
         });
@@ -192,8 +188,7 @@ describe('getPossiblePackageIds', () => {
         const org = '@example';
         const orgPrefix = 'example-preset';
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             org,
             orgPrefix,
@@ -206,8 +201,7 @@ describe('getPossiblePackageIds', () => {
         const org = '@example';
         const orgPrefix = 'preset';
 
-        const packageIds1 = getPossiblePackageIds({
-            packageId: '@other/test',
+        const packageIds1 = getPossiblePackageIds('@other/test', {
             org,
             orgPrefix,
             strict: true,
@@ -215,8 +209,7 @@ describe('getPossiblePackageIds', () => {
 
         expect(packageIds1).toEqual(['@other/test']);
 
-        const packageIds2 = getPossiblePackageIds({
-            packageId: '@example/test',
+        const packageIds2 = getPossiblePackageIds('@example/test', {
             org,
             orgPrefix,
         });
@@ -229,8 +222,7 @@ describe('getPossiblePackageIds', () => {
         const prefix = 'preset';
         const strict = true;
 
-        const packageIds = getPossiblePackageIds({
-            packageId,
+        const packageIds = getPossiblePackageIds(packageId, {
             prefix,
             strict,
         });

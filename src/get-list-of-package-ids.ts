@@ -1,18 +1,14 @@
 import path from 'path';
 import { normalizeOrg, parsePackageId } from './utils';
+import { PrefixOptions } from './resolve-with-prefix';
 
-type Args = {
-    packageId: string;
-    prefix?: string | string[];
-    org?: string;
-    orgPrefix?: string | string[];
-    strict?: boolean;
-};
+function getPossiblePackageIds(
+    packageId: string,
+    prefixOptions: PrefixOptions = {},
+) {
+    const { prefix: standardPrefix, orgPrefix, strict } = prefixOptions;
 
-function getPossiblePackageIds(args: Args) {
-    const { packageId, prefix: standardPrefix, orgPrefix, strict } = args;
-
-    const org = normalizeOrg(args.org);
+    const org = normalizeOrg(prefixOptions.org);
 
     /**
      * Get package scope
