@@ -57,7 +57,6 @@ function resolveWithPrefixSync(
             /**
              * Throw immediately if something unexpected has gone wrong
              */
-            /* istanbul ignore next */
             if (e.code !== 'MODULE_NOT_FOUND') {
                 throw e;
             }
@@ -121,7 +120,6 @@ function resolveWithPrefixSync(
     /**
      * Fail safe if neither resolved or error has been set
      */
-    /* istanbul ignore next */
     if (!error) {
         error = new Error(`Unable to resolve: ${packageId}`);
     }

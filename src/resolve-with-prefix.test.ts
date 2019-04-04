@@ -336,7 +336,7 @@ describe('works with NODE_PATH', () => {
             const splitNodePath = process.env.NODE_PATH.split(sep);
             splitNodePath.push(dirNodeModules);
 
-            process.env.NODE_PATH = splitNodePath.join(':');
+            process.env.NODE_PATH = splitNodePath.join(sep);
         } else {
             process.env.NODE_PATH = dirNodeModules;
         }
