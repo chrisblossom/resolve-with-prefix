@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+-   Breaking: drop node 6 support
+
 ## [2.0.0] - 2019-04-04
 
 ### Changed
