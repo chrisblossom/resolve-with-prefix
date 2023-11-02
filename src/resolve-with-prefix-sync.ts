@@ -67,7 +67,8 @@ function resolveWithPrefixSync(
 			 *
 			 * Check for error messages on last possible packageId
 			 */
-			if (packageIds.indexOf(id) === packageIds.length - 1) {
+			const lastPackageId = packageIds[packageIds.length - 1];
+			if (lastPackageId === id) {
 				/**
 				 * Custom error messages
 				 *
