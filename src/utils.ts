@@ -1,28 +1,28 @@
 /**
  * normalize org to equal npm scope format @org/
  */
-function normalizeOrg(org?: string) {
-	if (!org) {
-		return org;
+function normalizeOrg(org?: string): string {
+	if (org === undefined || org === '') {
+		return '';
 	}
 
 	let normalized = org;
 
-	if (normalized.substring(0, 1) !== '@') {
+	if (normalized.startsWith('@') === false) {
 		normalized = `@${normalized}`;
 	}
 
-	if (normalized.substring(normalized.length - 1) !== '/') {
+	if (normalized.endsWith('/') === false) {
 		normalized += '/';
 	}
 
 	return normalized;
 }
 
-function parsePackageId(packageId: string = '') {
+function parsePackageId(packageId: string = ''): { scope: string; id: string } {
 	const splitPackageId = packageId.split('/');
 	const scope =
-		splitPackageId.length > 1 && splitPackageId[0].substring(0, 1) === '@'
+		splitPackageId.length > 1 && splitPackageId[0].startsWith('@') === true
 			? `${splitPackageId[0]}/`
 			: '';
 

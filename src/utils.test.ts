@@ -3,7 +3,12 @@ import { normalizeOrg, parsePackageId } from './utils';
 describe('normalizeOrg', () => {
 	test('handles undefined', () => {
 		const result = normalizeOrg();
-		expect(result).toEqual(undefined);
+		expect(result).toEqual('');
+	});
+
+	test('handles empty string', () => {
+		const result = normalizeOrg('');
+		expect(result).toEqual('');
 	});
 
 	test('adds @', () => {
@@ -70,6 +75,7 @@ describe('parsePackageId', () => {
 			id: 'package/deep/inside',
 		});
 	});
+
 	test('handles package with deep / without scope', () => {
 		const packageId = 'package/deep/inside';
 

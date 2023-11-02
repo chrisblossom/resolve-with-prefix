@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
+
 import path from 'path';
 import { platform } from 'os';
-
 import {
 	resolveWithPrefix,
 	resolveWithPrefixSync,
@@ -103,6 +104,30 @@ describe('resolves other without preset', () => {
 
 	test('async', async () => {
 		const resolved = await resolveWithPrefix(packageId);
+
+		checkResult(resolved);
+	});
+
+	test('sync', () => {
+		const resolved = resolveWithPrefixSync(packageId);
+
+		checkResult(resolved);
+	});
+});
+
+describe('resolves other without preset and empty string prefix & org', () => {
+	const checkResult = (result: string) => {
+		const expected = path.resolve(dir, 'node_modules/other/index.js');
+
+		expect(result).toEqual(expected);
+	};
+
+	const packageId = 'other';
+	const prefix = '';
+	const org = '';
+
+	test('async', async () => {
+		const resolved = await resolveWithPrefix(packageId, { prefix, org });
 
 		checkResult(resolved);
 	});
@@ -332,7 +357,7 @@ describe('works with NODE_PATH', () => {
 		process.chdir(cwd);
 
 		const sep = platform() === 'win32' ? ';' : ':';
-		if (process.env.NODE_PATH) {
+		if (process.env.NODE_PATH != null) {
 			const splitNodePath = process.env.NODE_PATH.split(sep);
 			splitNodePath.push(dirNodeModules);
 

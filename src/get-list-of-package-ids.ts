@@ -5,7 +5,7 @@ import { PrefixOptions } from './resolve-with-prefix';
 function getPossiblePackageIds(
 	packageId: string,
 	prefixOptions: PrefixOptions = {},
-) {
+): string[] {
 	const { prefix: standardPrefix, orgPrefix, strict } = prefixOptions;
 
 	const org = normalizeOrg(prefixOptions.org);
@@ -17,12 +17,12 @@ function getPossiblePackageIds(
 
 	const isOrg = org === scope;
 	const matchedPrefix =
-		isOrg === true && orgPrefix ? orgPrefix : standardPrefix;
+		isOrg === true && orgPrefix != null ? orgPrefix : standardPrefix;
 
 	const prefixes = Array.isArray(matchedPrefix)
 		? matchedPrefix
 		: [matchedPrefix].reduce((acc: string[], prefix) => {
-				if (!prefix) {
+				if (prefix == null) {
 					return acc;
 				}
 
@@ -39,7 +39,7 @@ function getPossiblePackageIds(
 	/**
 	 * Handle absolute and relative paths
 	 */
-	if (path.isAbsolute(packageId) || packageId.substring(0, 1) === '.') {
+	if (path.isAbsolute(packageId) || packageId.startsWith('.')) {
 		return [packageId];
 	}
 
@@ -47,8 +47,7 @@ function getPossiblePackageIds(
 	 * Handle explicitly set as module
 	 */
 	const moduleIdentifier = 'module:';
-	const isModule =
-		packageId.substring(0, moduleIdentifier.length) === moduleIdentifier;
+	const isModule = packageId.startsWith(moduleIdentifier);
 	if (isModule) {
 		return [packageId.substring(moduleIdentifier.length)];
 	}

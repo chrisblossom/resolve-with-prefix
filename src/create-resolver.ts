@@ -6,7 +6,10 @@ import {
 } from './resolve-with-prefix';
 
 function createResolver(options: Options = {}) {
-	return (packageId: string, { dirname }: ResolveOptions = {}) => {
+	return async (
+		packageId: string,
+		{ dirname }: ResolveOptions = {},
+	): Promise<ReturnType<typeof resolveWithPrefix>> => {
 		return resolveWithPrefix(packageId, {
 			...options,
 			dirname,
@@ -15,7 +18,10 @@ function createResolver(options: Options = {}) {
 }
 
 function createResolverSync(options: Options = {}) {
-	return (packageId: string, { dirname }: ResolveOptions = {}) => {
+	return (
+		packageId: string,
+		{ dirname }: ResolveOptions = {},
+	): ReturnType<typeof resolveWithPrefixSync> => {
 		return resolveWithPrefixSync(packageId, {
 			...options,
 			dirname,

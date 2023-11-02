@@ -26,9 +26,8 @@ function resolveWithPrefixSync(
 	 * https://github.com/browserify/resolve/issues/39#issuecomment-306223854
 	 */
 	const sep = platform() === 'win32' ? ';' : ':';
-	const nodePaths = process.env.NODE_PATH
-		? process.env.NODE_PATH.split(sep)
-		: [];
+	const nodePaths =
+		process.env.NODE_PATH != null ? process.env.NODE_PATH.split(sep) : [];
 	const resolveOptions = {
 		basedir: dirname,
 		paths: nodePaths,
@@ -87,7 +86,7 @@ function resolveWithPrefixSync(
 					} catch (e2) {}
 				}
 
-				if (!error && org) {
+				if (!error && org != null) {
 					/**
 					 * Check if user forgot to add @org
 					 */
@@ -114,7 +113,7 @@ function resolveWithPrefixSync(
 		/**
 		 * Immediately return resolved in for loop to stop excess checks
 		 */
-		if (resolved) {
+		if (resolved != null) {
 			return resolved;
 		}
 	}

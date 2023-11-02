@@ -9,6 +9,16 @@ describe('getPossiblePackageIds', () => {
 		expect(packageIds).toEqual(['one-preset-test']);
 	});
 
+	test('returns packageId with empty prefix and org', () => {
+		const packageId = 'one-preset-test';
+		const prefix = '';
+		const org = '';
+
+		const packageIds = getPossiblePackageIds(packageId, { prefix, org });
+
+		expect(packageIds).toEqual(['one-preset-test']);
+	});
+
 	test('@org - returns packageId with no prefix', () => {
 		const packageId = '@example/one-preset-test';
 

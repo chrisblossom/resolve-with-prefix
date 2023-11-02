@@ -2,16 +2,16 @@ import { createResolver, createResolverSync } from './create-resolver';
 import { resolveWithPrefixSync } from './resolve-with-prefix-sync';
 import { resolveWithPrefixAsync as resolveWithPrefix } from './resolve-with-prefix-async';
 
-export type PrefixOptions = {
+export interface PrefixOptions {
 	prefix?: string | string[];
 	org?: string;
 	orgPrefix?: string | string[];
 	strict?: boolean;
-};
+}
 
-export type ResolveOptions = {
+export interface ResolveOptions {
 	dirname?: string;
-};
+}
 
 export type Options = PrefixOptions & ResolveOptions;
 

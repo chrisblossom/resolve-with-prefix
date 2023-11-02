@@ -1,3 +1,5 @@
+/* eslint-disable jest/expect-expect,@typescript-eslint/ban-ts-comment */
+
 import path from 'path';
 import { createResolver, createResolverSync } from './create-resolver';
 import { ResolveOptions } from './resolve-with-prefix';
