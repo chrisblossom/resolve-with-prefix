@@ -14,19 +14,22 @@
 		"configuration"
 	],
 	"license": "MIT",
+	"private": false,
 	"repository": "chrisblossom/resolve-with-prefix",
 	"homepage": "https://github.com/chrisblossom/resolve-with-prefix",
 	"author": "Chris Blossom",
 	"engines": {
-		"node": ">=8.9.0"
+		"node": ">=18.12.0"
 	},
 	"files": [
 		"dist/"
 	],
 	"main": "dist/resolve-with-prefix.js",
+	"module": "commonjs",
 	"types": "dist/resolve-with-prefix.d.ts",
 	"scripts": {
 		"build": "backtrack build --production",
+		"check.all": "backtrack check.all",
 		"clean": "backtrack clean",
 		"dev": "backtrack dev --development",
 		"format": "backtrack format",
@@ -35,22 +38,23 @@
 		"lint": "backtrack lint",
 		"lint.fix": "backtrack lint.fix",
 		"prepublishOnly": "backtrack prepublishOnly",
+		"release": "backtrack release",
 		"test": "backtrack test",
 		"test.ci": "backtrack test.ci",
 		"test.ci-pretest": "backtrack test.ci-pretest",
 		"test.update": "jest --update-snapshot",
-		"test.watch": "jest --watch",
+		"test.watch": "jest --watch --pass-with-no-tests",
 		"typescript": "backtrack typescript"
 	},
 	"devDependencies": {
-		"@backtrack/core": "^0.2.0",
-		"@backtrack/preset-node": "^0.4.3",
-		"@types/jest": "^24.0.13",
-		"@types/node": "^12.0.2",
-		"@types/resolve": "0.0.8",
-		"typescript": "^3.4.5"
+		"@backtrack/core": "^0.2.1",
+		"@backtrack/preset-node": "^0.10.3",
+		"@types/jest": "^29.5.7",
+		"@types/node": "^18.18.8",
+		"@types/resolve": "1.20.4",
+		"typescript": "^5.2.2"
 	},
 	"dependencies": {
-		"resolve": "^1.11.0"
+		"resolve": "^1.22.8"
 	}
 }
