@@ -21,22 +21,22 @@ For example, `@babel/env` --> `@babel/preset-env`.
 
 ```js
 import {
-    resolveWithPrefix,
-    resolveWithPrefixSync,
-    createResolver,
-    createResolverSync,
+	resolveWithPrefix,
+	resolveWithPrefixSync,
+	createResolver,
+	createResolverSync,
 } from 'resolve-with-prefix';
 
 const presetOptions = {
-    prefix: 'babel-preset',
-    org: '@babel',
-    orgPrefix: 'preset',
+	prefix: 'babel-preset',
+	org: '@babel',
+	orgPrefix: 'preset',
 };
 
 const pluginOptions = {
-    prefix: 'babel-plugin',
-    org: '@babel',
-    orgPrefix: 'plugin',
+	prefix: 'babel-plugin',
+	org: '@babel',
+	orgPrefix: 'plugin',
 };
 
 const resolvePreset = createResolver(presetOptions);
@@ -63,41 +63,44 @@ resolvePluginSync('transform-object-rest-spread');
 import { resolveWithPrefix, createResolver } from 'resolve-with-prefix';
 
 const options = {
-    /**
-     * Prefix to add to packageId
-     *
-     * Optional
-     *
-     * Accepts a single or an array of prefixes
-     */
-    prefix: 'example-prefix',
+	/**
+	 * Prefix to add to packageId
+	 *
+	 * Optional
+	 *
+	 * Accepts a single or an array of prefixes
+	 */
+	prefix: 'example-prefix',
 
-    /**
-     * NPM Scope of organization to override prefix
-     *
-     * Optional
-     */
-    org: '@example',
+	/**
+	 * NPM Scope of organization to override prefix
+	 *
+	 * Optional
+	 */
+	org: '@example',
 
-    /**
-     * Org prefixes
-     *
-     * Optional
-     *
-     * Accepts a single or an array of prefixes
-     */
-    orgPrefix: ['prefix', 'example-prefix'],
+	/**
+	 * Org prefixes
+	 *
+	 * Optional
+	 *
+	 * Accepts a single or an array of prefixes
+	 */
+	orgPrefix: [
+		'prefix',
+		'example-prefix',
+	],
 
-    /**
-     * Only allow prefixed module resolution.
-     * Explicit modules can be required by pre-pending "module:"
-     * For example, module:local-module
-     *
-     * Optional
-     *
-     * Default: true
-     */
-    strict: false,
+	/**
+	 * Only allow prefixed module resolution.
+	 * Explicit modules can be required by pre-pending "module:"
+	 * For example, module:local-module
+	 *
+	 * Optional
+	 *
+	 * Default: true
+	 */
+	strict: false,
 };
 
 const resolve = createResolver(options);

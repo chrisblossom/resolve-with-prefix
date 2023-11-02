@@ -3,21 +3,21 @@ import { resolveWithPrefixSync } from './resolve-with-prefix-sync';
 import { resolveWithPrefixAsync as resolveWithPrefix } from './resolve-with-prefix-async';
 
 export type PrefixOptions = {
-    prefix?: string | string[];
-    org?: string;
-    orgPrefix?: string | string[];
-    strict?: boolean;
+	prefix?: string | string[];
+	org?: string;
+	orgPrefix?: string | string[];
+	strict?: boolean;
 };
 
 export type ResolveOptions = {
-    dirname?: string;
+	dirname?: string;
 };
 
 export type Options = PrefixOptions & ResolveOptions;
 
 export {
-    resolveWithPrefix,
-    resolveWithPrefixSync,
-    createResolver,
-    createResolverSync,
+	resolveWithPrefix,
+	resolveWithPrefixSync,
+	createResolver,
+	createResolverSync,
 };
