@@ -52,7 +52,6 @@
 		"@types/jest": "^29.5.7",
 		"@types/node": "^18.18.8",
 		"@types/resolve": "1.20.4",
-		"prettier-2": "npm:prettier@^2",
 		"typescript": "^5.2.2"
 	},
 	"dependencies": {
