@@ -9,7 +9,7 @@ function createResolver(options: Options = {}) {
 	return async (
 		packageId: string,
 		{ dirname }: ResolveOptions = {},
-	): Promise<ReturnType<typeof resolveWithPrefix>> => {
+	): ReturnType<typeof resolveWithPrefix> => {
 		return resolveWithPrefix(packageId, {
 			...options,
 			dirname,
