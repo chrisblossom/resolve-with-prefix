@@ -197,7 +197,7 @@ describe('default strict:true, require module:', () => {
 		expect(error.code).toEqual('MODULE_NOT_FOUND');
 		expect(error.message).toMatchInlineSnapshot(`
             "Cannot find module 'one-preset-explicit-name-test' from '<PROJECT_ROOT>'
-            - If you want to resolve \\"explicit-name-test\\", use \\"module:explicit-name-test\\""
+            - If you want to resolve "explicit-name-test", use "module:explicit-name-test""
         `);
 	};
 
@@ -230,7 +230,7 @@ describe('strict:true, require module:', () => {
 		expect(error.code).toEqual('MODULE_NOT_FOUND');
 		expect(error.message).toMatchInlineSnapshot(`
             "Cannot find module 'one-preset-explicit-name-test' from '<PROJECT_ROOT>'
-            - If you want to resolve \\"explicit-name-test\\", use \\"module:explicit-name-test\\""
+            - If you want to resolve "explicit-name-test", use "module:explicit-name-test""
         `);
 	};
 
@@ -263,7 +263,7 @@ describe('strict:true, allow other errors', () => {
 		expect(error.code).toEqual('MODULE_NOT_FOUND');
 		expect(error.message).toMatchInlineSnapshot(`
             "Cannot find module 'one-preset-scoped' from '<PROJECT_ROOT>'
-            - Did you mean \\"@example/one-preset-scoped\\"?"
+            - Did you mean "@example/one-preset-scoped"?"
         `);
 	};
 
@@ -296,7 +296,7 @@ describe('if module not found but it looks like @org missing, add error', () => 
 		expect(error.code).toEqual('MODULE_NOT_FOUND');
 		expect(error.message).toMatchInlineSnapshot(`
             "Cannot find module 'one-preset-scoped' from '<PROJECT_ROOT>'
-            - Did you mean \\"@example/one-preset-scoped\\"?"
+            - Did you mean "@example/one-preset-scoped"?"
         `);
 	};
 

@@ -24,5 +24,16 @@ module.exports = {
 				'import/no-cycle': 'off',
 			},
 		},
+
+		/**
+		 * Jest v29 does not support prettier v3.
+		 *
+		 * Remove this and the prettier-2 package when Jest v30 is released.
+		 *
+		 * https://jestjs.io/docs/configuration/#prettierpath-string
+		 */
+		jest: {
+			prettierPath: require.resolve('prettier-2'),
+		},
 	},
 };
