@@ -18,6 +18,10 @@ async function resolveAsync(
 				return;
 			}
 
+			if (resolved === undefined) {
+				throw new Error(`Cannot find module ${packageId}`);
+			}
+
 			resolve(resolved);
 		});
 	});
@@ -70,7 +74,9 @@ async function resolveWithPrefixAsync(
 	for await (const id of packageIds) {
 		try {
 			resolved = await resolveAsync(id, resolveOptions);
-		} catch (e) {
+		} catch (err: unknown) {
+			const e = err as Error & { code?: string };
+
 			/**
 			 * Throw immediately if something unexpected has gone wrong
 			 */

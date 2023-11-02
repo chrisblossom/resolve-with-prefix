@@ -53,7 +53,9 @@ function resolveWithPrefixSync(
 	for (const id of packageIds) {
 		try {
 			resolved = resolveSync(id, resolveOptions);
-		} catch (e) {
+		} catch (err: unknown) {
+			const e = err as Error & { code?: string };
+
 			/**
 			 * Throw immediately if something unexpected has gone wrong
 			 */
